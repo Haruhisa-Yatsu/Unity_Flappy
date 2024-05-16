@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -47,20 +48,34 @@ public class Player : MonoBehaviour
 
         position += new Vector3(0, -_velocity, 0);
 
-        // ここからの箇所は確認をしやすくするためのコードなので
-        // 特に写さなくて大丈夫です
-        if(position.y < 0)
+
+        if(position.y > 720.0f)
         {
-            position.y = 0;
+            position.y = 720.0f;
+            _velocity = 0.0f;
         }
-        // ----ここまで
+
+        if(position.y < -100)
+        {
+            GameOver();
+        }
 
         _rectTransform.position = position;
     }
 
+    /// <summary>
+    /// ゲームオーバーの処理をまとめる
+    /// </summary>
+    private void GameOver()
+    {
+        SceneManager.LoadScene("Title");
+
+        Debug.Log("壁に当たったよ");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("壁に当たったよ");
+        GameOver();
     }
 
 }

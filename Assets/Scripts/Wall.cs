@@ -22,5 +22,11 @@ public class Wall : MonoBehaviour
         pos.x += -_velocity * Time.deltaTime;
 
         _rectTransform.position = pos;
+
+
+        if (pos.x < -100.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
