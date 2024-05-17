@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     /// </summary>
     private RectTransform _rectTransform;
 
-
     /// <summary>
     /// 速さ
     /// </summary>
@@ -21,6 +20,11 @@ public class Player : MonoBehaviour
     /// ジャンプ力
     /// </summary>
     public float _jump = 2.0f;
+
+    /// <summary>
+    /// スコアクラス
+    /// </summary>
+    public Score _score;
 
 
     // Start is called before the first frame update
@@ -45,16 +49,16 @@ public class Player : MonoBehaviour
 
         // 移動処理
         var position = _rectTransform.position;
-
         position += new Vector3(0, -_velocity, 0);
 
-
+        // 天井に頭をぶつけた時の処理
         if(position.y > 720.0f)
         {
             position.y = 720.0f;
             _velocity = 0.0f;
         }
 
+        // 落下したときの処理
         if(position.y < -100)
         {
             GameOver();
@@ -84,9 +88,7 @@ public class Player : MonoBehaviour
         // "ScoreUp"タグを持ったオブジェクトのTriggerに衝突したら
         if (collision.CompareTag("ScoreUp"))
         {
-            // ScoreUpをここで呼びたい
-
-            // Score.csのScoreUp()を呼び出せるようにしてみてください。
+            _score.ScoreUp();
         }
     }
 }
