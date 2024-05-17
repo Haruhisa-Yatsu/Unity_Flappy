@@ -75,7 +75,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameOver();
-    }
+        // "Wall"タグを持ったオブジェクトのTriggerに衝突したら
+        if (collision.CompareTag("Wall"))
+        {
+            GameOver();
+        }
 
+        // "ScoreUp"タグを持ったオブジェクトのTriggerに衝突したら
+        if (collision.CompareTag("ScoreUp"))
+        {
+            // ScoreUpをここで呼びたい
+
+            // Score.csのScoreUp()を呼び出せるようにしてみてください。
+        }
+    }
 }

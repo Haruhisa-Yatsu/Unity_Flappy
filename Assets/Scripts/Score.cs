@@ -51,10 +51,5 @@ public class Score : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            ScoreUp();
-        }
-
     }
 }
