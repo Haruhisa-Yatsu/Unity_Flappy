@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private RectTransform _rectTransform;
 
+    public float _gravity;
+
     /// <summary>
     /// 速さ
     /// </summary>
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // 1/60 秒
-        _velocity += 9.80665f * Time.deltaTime;
+        _velocity += _gravity * Time.deltaTime;
 
 
         // 左クリックを入力した時 True
@@ -48,23 +50,23 @@ public class Player : MonoBehaviour
         }
 
         // 移動処理
-        var position = _rectTransform.position;
-        position += new Vector3(0, -_velocity, 0);
+        var position = _rectTransform.localPosition;
+        position += new Vector3(0, -_velocity, 0) * Time.deltaTime;
 
         // 天井に頭をぶつけた時の処理
-        if(position.y > 720.0f)
+        if(position.y > 360.0f)
         {
-            position.y = 720.0f;
+            position.y = 360.0f;
             _velocity = 0.0f;
         }
 
         // 落下したときの処理
-        if(position.y < -100)
+        if(position.y < -460.0f)
         {
             GameOver();
         }
 
-        _rectTransform.position = position;
+        _rectTransform.localPosition = position;
     }
 
     /// <summary>

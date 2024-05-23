@@ -10,6 +10,11 @@ public class Wall : MonoBehaviour
     private RectTransform _rectTransform;
 
     /// <summary>
+    /// デストロイするポジションを示すトランスフォームを指定する
+    /// </summary>
+    public RectTransform _destroyPosition;
+
+    /// <summary>
     /// 左に移動する速さ
     /// </summary>
     public float _velocity = 2.0f;
@@ -25,14 +30,14 @@ public class Wall : MonoBehaviour
     void Update()
     {
         // 左に進む処理
-        var pos = _rectTransform.position;
+        var pos = _rectTransform.localPosition;
         pos.x += -_velocity * Time.deltaTime;
 
-        _rectTransform.position = pos;
+        _rectTransform.localPosition = pos;
 
 
         // 画面左に進んだらDestroy(削除)する
-        if (pos.x < -100.0f)
+        if (pos.x < _destroyPosition.localPosition.x)
         {
             Destroy(gameObject);
         }

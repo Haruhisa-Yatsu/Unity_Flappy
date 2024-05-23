@@ -6,6 +6,8 @@ public class WallGenerator : MonoBehaviour
 {
     public Wall _wallPrefab;
 
+    public RectTransform _destroyPosition;
+
     /// <summary>
     /// 生成感覚のカウンタ
     /// </summary>
@@ -38,6 +40,8 @@ public class WallGenerator : MonoBehaviour
         {
             _generateCounter -= _generateSecond;
             var wall = Instantiate(_wallPrefab,transform);
+            wall._destroyPosition = _destroyPosition;
+
 
             var pos = wall.transform.localPosition;
             pos.y += Random.Range(-1.0f ,1.0f) * _maxShift;
